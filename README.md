@@ -1,5 +1,14 @@
 # GIRR React Frontend
 
+## TODO / Roadmap
+
+- Titrage personnalisable (choix de la police, couleur, position)
+- Effets d'apparition/disparition (glitch, fondu, etc.)
+- Vue XSplit flexible (séparer titre et média en 2 pages ou non)
+- Aperçu XSplit dans l'éditeur des sujets/émissions
+- Travail full cloud (édition et utilisation 100% en ligne)
+
+
 Migration du frontend GIRR de Vue.js 2 vers React 18+, avec Vite, Tailwind CSS, Zustand, React Router et intégration WebSocket.
 
 ## Fonctionnalités principales
