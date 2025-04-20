@@ -2,6 +2,13 @@
 
 ## TODO / Roadmap
 
+### Prioritaire (hérité du projet originel)
+- [ ] Tests unitaires
+- [ ] Déploiement automatique
+- [ ] Diagrammes (Architecture, Modèles, Routes)
+- [ ] Voir/reprendre les composants de [TwitchToast](https://github.com/codlab/TwitchToast)
+
+### Fonctionnalités à venir
 - Titrage personnalisable (choix de la police, couleur, position)
 - Effets d'apparition/disparition (glitch, fondu, etc.)
 - Vue XSplit flexible (séparer titre et média en 2 pages ou non)
