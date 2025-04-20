@@ -64,6 +64,66 @@ src/
 
 ---
 
+## Migration Vue 2 → React
+
+| Vue 2 (Options API)         | React 18 + Hooks/Zustand         |
+|----------------------------|----------------------------------|
+| `data() { ... }`           | `useState()`/Zustand store        |
+| `computed: { ... }`        | `useMemo()`/Zustand selectors     |
+| `methods: { ... }`         | Fonctions ou hooks                |
+| `mounted()`                | `useEffect(() => ..., [])`        |
+| `v-for`                    | `{array.map(...)}`                |
+| `v-if`                     | `{condition && ...}`              |
+| `props: [...]`             | Props de fonction                 |
+| `emit`                     | Props callback                    |
+| `vue-router`               | `react-router-dom`                |
+| `pinia`                    | `zustand`                         |
+| `axios`                    | `axios` (identique)               |
+| `WebSocket natif`          | `WebSocket` natif + hooks         |
+
+---
+
+## Liaison avec le backend (API & WebSocket)
+
+### API REST
+- Configuration via `.env` :
+  - `VITE_API_BASE_URL` (ex: http://localhost:3000/api)
+- Les appels API sont centralisés dans `src/services/api.ts`.
+- Exemple d’utilisation :
+
+```ts
+import { getShows, getShowById } from "@/services/api";
+
+// Pour récupérer la liste des shows
+const shows = await getShows();
+
+// Pour récupérer le détail d’un show
+const show = await getShowById("idShow");
+```
+
+### WebSocket
+- Configuration via `.env` :
+  - `VITE_WS_URL` (ex: ws://localhost:3000/ws)
+- Gestion centralisée dans `src/services/websocket.ts` et le hook `useWebSocket`.
+- Exemple d’utilisation :
+
+```ts
+import { connectWebSocket, onWebSocketMessage, sendWebSocketMessage } from "@/services/websocket";
+
+// Connexion
+const ws = connectWebSocket(import.meta.env.VITE_WS_URL);
+
+// Ecouter les messages
+const unsubscribe = onWebSocketMessage((data) => {
+  console.log("Message reçu:", data);
+});
+
+// Envoyer un message
+sendWebSocketMessage({ type: "ping" });
+```
+
+---
+
 ## Intégration API & WebSocket
 
 - **API REST** : toutes les requêtes passent par `/src/services/api.ts` (Axios, baseURL configurable)
