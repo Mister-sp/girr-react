@@ -1,44 +1,124 @@
-# Welcome to React Router!
+# GIRR React Frontend
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Migration du frontend GIRR de Vue.js 2 vers React 18+, avec Vite, Tailwind CSS, Zustand, React Router et intégration WebSocket.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Fonctionnalités principales
 
-## Features
+- ⚡️ Vite + React 18+
+- 🎨 Tailwind CSS pour une UI moderne et responsive
+- 🔀 React Router pour la navigation
+- 🗃️ Zustand pour la gestion d’état globale
+- 🔌 API REST (Axios) et WebSocket natif
+- 📱 Responsive (mobile/tablette/desktop)
+- 🧩 Structure modulaire : components, pages, services, hooks
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+---
 
-## Getting Started
+## Installation
 
-### Installation
+1. **Cloner le repo**
 
-Install the dependencies:
+```bash
+git clone <repo-url>
+cd girr-react
+```
+
+2. **Configurer l’environnement**
+
+Copier `.env.example` en `.env` et adapter les URLs si besoin :
+
+```bash
+cp .env.example .env
+```
+
+- `VITE_API_BASE_URL=http://localhost:3000/api`
+- `VITE_WS_URL=ws://localhost:3000/ws`
+
+3. **Installer les dépendances**
 
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+4. **Démarrer en développement**
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+---
 
-## Building for Production
+## Structure du projet
 
-Create a production build:
+```
+src/
+  components/
+    common/        # Card, Header, Loader, NavBar…
+    features/      # ShowSubjects, etc.
+  hooks/           # useWebSocket, hooks personnalisés
+  pages/           # HomePage, ShowPage, ConfigPage…
+  services/        # api.ts (Axios), websocket.ts
+  store/           # useShowStore.ts (Zustand)
+  App.tsx          # Routing principal
+```
+
+---
+
+## Intégration API & WebSocket
+
+- **API REST** : toutes les requêtes passent par `/src/services/api.ts` (Axios, baseURL configurable)
+- **WebSocket** : connexion unique via `/src/services/websocket.ts` + hook React `/src/hooks/useWebSocket.ts`
+- **Exemple** : HomePage se met à jour en temps réel sur réception d’un message `show_updated` via WebSocket
+
+---
+
+## Responsivité
+
+- UI 100% responsive grâce à Tailwind CSS
+- Conteneurs adaptatifs (`max-w-2xl mx-auto p-4`, etc.)
+- Testé sur mobile, tablette, desktop
+
+---
+
+## Développement
+
+- **Ajouter une page** : créer un fichier dans `src/pages/`, ajouter une route dans `App.tsx`
+- **Ajouter un composant** : placer dans `src/components/common` ou `features` selon le cas
+- **Ajouter un état global** : éditer `src/store/useShowStore.ts`
+- **Brancher un flux temps réel** : utiliser `useWebSocket` dans le composant cible
+
+---
+
+## Bonnes pratiques
+
+- Ne jamais exposer de secrets dans le frontend
+- Préférer Zustand pour les états globaux simples
+- Utiliser Tailwind pour la cohérence visuelle
+- Respecter la structure modulaire
+
+---
+
+## Lancer les tests (si présents)
 
 ```bash
+npm run test
+```
+
+---
+
+## Déploiement
+
+Construire pour la prod :
+
+```bash
+npm run build
+```
+
+---
+
+## Contact & Support
+
+Pour toute question ou bug, ouvrir une issue ou contacter l’équipe GIRR.
 npm run build
 ```
 
